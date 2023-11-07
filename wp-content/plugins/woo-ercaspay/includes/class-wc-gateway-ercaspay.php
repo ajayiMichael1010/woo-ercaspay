@@ -15,7 +15,7 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 
 	/**
 	 * Should orders be marked as complete after payment?
-	 * 
+	 *
 	 * @var bool
 	 */
 	public $autocomplete_order;
@@ -70,20 +70,6 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 	 */
 	public $remove_cancel_order_button;
 
-
-	/**
-	 * Who bears Ercaspay charges?
-	 *
-	 * @var string
-	 */
-	public $charges_account;
-
-	/**
-	 * A flat fee to charge the sub account for each transaction.
-	 *
-	 * @var string
-	 */
-	public $transaction_charges;
 
 	/**
 	 * Should custom metadata be enabled?
@@ -211,8 +197,6 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 		$this->secret_key = $this->testmode ? $this->test_secret_key : $this->live_secret_key;
 
 		// Hooks
-		//add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
-		//add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action(
@@ -397,6 +381,15 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 				'description' => __( 'Enter your Live Public Key here.', 'woo-ercaspay' ),
 				'default'     => '',
 			),
+            'autocomplete_order'               => array(
+                'title'       => __( 'Autocomplete Order After Payment', 'woo-paystack' ),
+                'label'       => __( 'Autocomplete Order', 'woo-paystack' ),
+                'type'        => 'checkbox',
+                'class'       => 'wc-paystack-autocomplete-order',
+                'description' => __( 'If enabled, the order will be marked as complete after successful payment', 'woo-paystack' ),
+                'default'     => 'no',
+                'desc_tip'    => true,
+            ),
 			'remove_cancel_order_button'       => array(
 				'title'       => __( 'Remove Cancel Order & Restore Cart Button', 'woo-ercaspay' ),
 				'label'       => __( 'Remove the cancel order & restore cart button on the pay for order page', 'woo-ercaspay' ),
@@ -494,49 +487,47 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
     /**
      * Verify Ercaspay payment.
      */
-    public function verify_ercaspay_transaction() {
+    public function verify_ercaspay_transaction()
+    {
 
-        if ( isset( $_REQUEST['reference'] ) && isset($_REQUEST['status']) ) {
-            $reference = sanitize_text_field( $_REQUEST['reference'] );
+        if (isset($_REQUEST['reference']) && isset($_REQUEST['status'])) {
+            $reference = sanitize_text_field($_REQUEST['reference']);
             $status = sanitize_text_field($_REQUEST['status']);
-        } else {
-            $reference = false;
-            $status = false;
-        }
 
-        @ob_clean();
+            @ob_clean();
 
-        if ( $reference  && $status) {
+            if ($reference && $status) {
 
-            $order_details = explode("_", $reference);
-            $order_id = $order_details[0];
+                $order_details = explode("_", $reference);
+                $order_id = $order_details[0];
 
-            $order = wc_get_order($order_id);
+                $order = wc_get_order($order_id);
 
-            $order->payment_complete( $reference );
-            $order->add_order_note( sprintf( __( 'Payment via Ercaspay is successful (Transaction Reference: %s)', 'woo-ercaspay' ), $reference ) );
+                $order->payment_complete($reference);
+                $order->add_order_note(sprintf(__('Payment via Ercaspay is successful (Transaction Reference: %s)', 'woo-ercaspay'), $reference));
 
-            if($status ==="PAID"){
-                $order->update_status( 'processing' );
+                if ($status === "PAID") {
+                    $order->update_status($this->autocomplete_order ? 'completed' : 'processing');
+                    $order->update_status('processing');
 
-                $order->save();
+                    $order->save();
 
-                WC()->cart->empty_cart();
+                    WC()->cart->empty_cart();
 
-				wp_redirect( $this->get_return_url( $order ) );
+                    wp_redirect($this->get_return_url($order));
+                } elseif ($status === "CANCELLED") {
+                    $order->update_status('cancelled');
+                    if ($this->remove_cancel_order_button) {
+                        WC()->cart->empty_cart();
+                    }
+                    wp_redirect(wc_get_page_permalink('cart'));
+                } else {
+                    $order->update_status('failed');
+                    wp_redirect(wc_get_page_permalink('cart'));
+                }
+
             }
-			elseif ($status === "CANCELLED"){
-				$order->update_status( 'cancelled' );
-				wp_redirect( wc_get_page_permalink( 'cart' ) );
-			}
-			else{
-				$order->update_status( 'failed' );
-				wp_redirect( wc_get_page_permalink( 'cart' ) );
-			}
-
+            exit;
         }
-
-        exit;
-
     }
 }
