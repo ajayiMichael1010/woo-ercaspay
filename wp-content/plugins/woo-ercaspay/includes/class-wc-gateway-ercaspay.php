@@ -223,7 +223,6 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 			)
 		);
 
-		//add_action( 'woocommerce_receipt_' . $this->id, array( $this, 'receipt_page' ) );
 
         // Payment listener/API hook.
         add_action( 'woocommerce_api_wc_gateway_ercaspay', array( $this, 'verify_ercaspay_transaction') );
@@ -540,28 +539,4 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
         exit;
 
     }
-
-
-//	/**
-//	 * Displays the payment page.
-//	 *
-//	 * @param $order_id
-//	 */
-//	public function receipt_page( $order_id ) {
-//
-//		$order = wc_get_order( $order_id );
-//
-//		echo '<div id="wc-ercaspay-form">';
-//
-//		echo '<p>' . __( 'Thank you for your order, please click the button below to pay with Ercaspay.', 'woo-ercaspay' ) . '</p>';
-//
-//		echo '<div id="ercaspay_form"><form id="order_review" method="post" action="' . WC()->api_request_url('WC_Gateway_ErcasPay') . '"></form><button class="button" id="ercaspay-payment-button">' . __( 'Pay Now', 'woo-ercaspay' ) . '</button>';
-//
-//		if ( ! $this->remove_cancel_order_button ) {
-//			echo '  <a class="button cancel" id="ercaspay-cancel-payment-button" href="' . esc_url( $order->get_cancel_order_url() ) . '">' . __( 'Cancel order &amp; restore cart', 'woo-ercaspay' ) . '</a></div>';
-//		}
-//
-//		echo '</div>';
-//
-//	}
 }
