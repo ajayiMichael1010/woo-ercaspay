@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdd652b0-0ac3-48dc-bdbf-f18708ed9eb2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/includes/class-wc-gateway-ercaspay.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/includes/class-wc-gateway-ercaspay.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages/woo-paystack.pot" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages/woo-paystack.pot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordpress.workflow.yml" beforeDir="false" afterPath="$PROJECT_DIR$/wordpress.workflow.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +74,7 @@
       <workItem from="1699342343544" duration="3596000" />
       <workItem from="1699383933753" duration="2513000" />
       <workItem from="1699394556209" duration="938000" />
-      <workItem from="1699395852903" duration="3268000" />
+      <workItem from="1699395852903" duration="4628000" />
     </task>
     <servers />
   </component>
