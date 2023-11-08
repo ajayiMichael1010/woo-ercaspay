@@ -12,6 +12,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: mssolutions.com.ng
-        username: mssolutionsftp@mssolutions.com.ng
-        password: y%eh,ua4.@#L
+        username: ercaspayftp@mssolutions.com.ng
+        password: Xlg$ddf&7*y1
         server-dir: public_html/ercaspay/
