@@ -119,9 +119,9 @@ through the settings again and ensure that:
 
 == Screenshots ==
 
-1.  Ercaspay displayed as a payment method on the WooCommerce payment
-    methods page
-
-2.  Ercaspay WooCommerce payment gateway settings page
-
-3.  Ercaspay on WooCommerce Checkout
+1.  Ercaspay WooCommerce payment gateway settings page
+    ![Alt Text](screenshots/payment-setting-page.png)
+2. Ercaspay displayed as a payment method on the WooCommerce checkout page
+    ![Alt Text](screenshots/checkout.png)
+3.  Ercaspay payment page
+    ![Alt Text](screenshots/payment-page.png)
