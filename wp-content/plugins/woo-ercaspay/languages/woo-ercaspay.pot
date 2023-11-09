@@ -1,0 +1,186 @@
+# Copyright (C) 2023 ErcasPay WooCommerce Payment Gateway
+# This file is distributed under the same license as the ErcasPay WooCommerce Payment Gateway package.
+msgid ""
+msgstr ""
+"Project-Id-Version: ErcasPay WooCommerce Payment Gateway 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-ercaspay\n"
+"POT-Creation-Date: 2023-11-09 08:01:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/class-wc-gateway-ercaspay.php:156
+#: includes/class-wc-gateway-ercaspay.php:299
+#: includes/class-wc-gateway-ercaspay.php:342
+msgid "ErcasPay"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:157
+msgid "ErcasPay provide merchants with the tools and services needed to accept online payments from local and international customers using Mastercard, Visa, Verve Cards and Bank Accounts. <a href=\"%1$s\" target=\"_blank\">Sign up</a> for a Ercaspay account, and <a href=\"%2$s\" target=\"_blank\">get your API keys</a>."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:229
+msgid "ErcasPay does not support your store currency. Kindly set it to either NGN (&#8358), GHS (&#x20b5;), USD (&#36;), KES (KSh), ZAR (R), XOF (CFA), or EGP (E£) <a href=\"%s\">here</a>"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:263
+msgid "Please enter your Ercas merchant details <a href=\"%s\">here</a> to be able to use the Ercaspay WooCommerce plugin."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:302
+msgid "Return to payments"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:317
+msgid "ErcasPay Payment Gateway Disabled"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:331
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:332
+msgid "Enable ErcasPay"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:334
+msgid "Enable ErcasPay as a payment option on the checkout page."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:339
+msgid "Title"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:341
+msgid "This controls the payment method title which the user sees during checkout."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:346
+msgid "Description"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:348
+msgid "This controls the payment method description which the user sees during checkout."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:349
+msgid "Make payment using your debit and credit cards"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:353
+msgid "Test mode"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:354
+msgid "Enable Test Mode"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:356
+msgid "Test mode enables you to test payments before going live. <br />Once the LIVE MODE is enabled on your Ercaspay account uncheck this."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:361
+msgid "Test Secret Key"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:363
+msgid "Enter your Test Secret Key here"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:367
+msgid "Test Public Key"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:369
+msgid "Enter your Test Public Key here."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:373
+msgid "Live Secret Key"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:375
+msgid "Enter your Live Secret Key here."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:379
+msgid "Live Public Key"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:381
+msgid "Enter your Live Public Key here."
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:385
+msgid "Autocomplete Order After Payment"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:386
+msgid "Autocomplete Order"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:389
+msgid "If enabled, the order will be marked as complete after successful payment"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:394
+msgid "Remove Cancel Order & Restore Cart Button"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:395
+msgid "Remove the cancel order & restore cart button on the pay for order page"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:480
+msgid "Unable to process payment try again"
+msgstr ""
+
+#: includes/class-wc-gateway-ercaspay.php:507
+msgid "Payment via Ercaspay is successful (Transaction Reference: %s)"
+msgstr ""
+
+#: woo-ercaspay.php:85
+msgid "View Ercaspay WooCommerce Settings"
+msgstr ""
+
+#: woo-ercaspay.php:85
+msgid "Settings"
+msgstr ""
+
+#: woo-ercaspay.php:117
+msgid "Ercaspay requires WooCommerce to be installed and active. Click %s to install WooCommerce."
+msgstr ""
+
+#: woo-ercaspay.php:153
+msgid "Ercaspay test mode enabled"
+msgstr ""
+
+#: woo-ercaspay.php:154
+msgid "Ercaspay test mode is currently enabled. Remember to disable it when you want to start accepting live payment on your site."
+msgstr ""
+
+#: woo-ercaspay.php:160
+msgid "Disable Ercaspay test mode"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "ErcasPay WooCommerce Payment Gateway"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.ercaspay.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Accept and receive payments from anywhere and anyone in the world using Ercas Woocommerce Payment Gateway."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Michael"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.ercaspay.com"
+msgstr ""

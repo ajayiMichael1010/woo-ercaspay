@@ -508,7 +508,6 @@ class WC_Gateway_ErcasPay extends WC_Payment_Gateway_CC {
 
                 if ($status === "PAID") {
                     $order->update_status($this->autocomplete_order ? 'completed' : 'processing');
-                    $order->update_status('processing');
 
                     $order->save();
 
