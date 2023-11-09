@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fdd652b0-0ac3-48dc-bdbf-f18708ed9eb2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/includes/class-wc-gateway-ercaspay.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/includes/class-wc-gateway-ercaspay.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages/woo-ercaspay.pot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay.zip" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages/woo-ercaspay.pot" beforeDir="false" afterPath="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages/woo-ercaspay.pot" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/languages" />
       <recent name="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/assets/images" />
       <recent name="$PROJECT_DIR$/wp-content/plugins/woo-ercaspay/includes" />
     </key>
@@ -75,7 +76,7 @@
       <workItem from="1699342343544" duration="3596000" />
       <workItem from="1699383933753" duration="2513000" />
       <workItem from="1699394556209" duration="938000" />
-      <workItem from="1699395852903" duration="9478000" />
+      <workItem from="1699395852903" duration="10110000" />
     </task>
     <servers />
   </component>
