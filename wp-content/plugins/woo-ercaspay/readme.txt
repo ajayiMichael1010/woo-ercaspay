@@ -1,10 +1,10 @@
 === ErcasPay WooCommerce Payment Gateway ===
 Contributors: Michael
-Tags: ercaspay, woocommerce, payment gateway, tubiz plugins, verve, ghana, kenya, nigeria, south africa, naira, cedi, rand, mastercard, visa
+Tags: ercaspay, woocommerce, payment gateway, verve, ghana, kenya, nigeria, south africa, naira, cedi, rand, mastercard, visa
 Requires at least: 5.8
 Tested up to: 6.3
 Stable tag: 5.8.0
-Requires PHP: 7.4
+Requires PHP: 7.4 or later
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,6 @@ With Ercaspay for WooCommerce, you can accept payments via:
 * Advanced fraud detection
 * Understand your customers better through a simple and elegant dashboard
 * Access to attentive, empathetic customer support 24/7
-* Free updates as we launch new features and payment options
 * Clearly documented APIs to build your custom payment experiences
 
 Over 20,000 businesses of all sizes in Nigeria, Ghana, Kenya, and South Africa rely on Ercaspay's suite of products to receive payments and make payouts seamlessly. Sign up on [https://merchant.ercaspay.com/auth/register) to get started.
@@ -65,9 +64,8 @@ This plugin is meant to be used by merchants in Ghana, Kenya, Nigeria and South 
 2. __Title__ - This will represent Ercaspay on your list of Payment options during checkout. It guides users to know which option to select to pay with Ercaspay. __Title__ is set to "Debit/Credit Cards" by default, but you can change it to suit your needs.
 3. __Description__ - This controls the message that appears under the payment fields on the checkout page. Use this space to give more details to customers about what Ercaspay is and what payment methods they can use with it.
 4. __Test Mode__ - Check this to enable test mode. When selected, the fields in step six will say "Test" instead of "Live." Test mode enables you to test payments before going live. The orders process with test payment methods, no money is involved so there is no risk. You can uncheck this when your store is ready to accept real payments.
-5. __Payment Option__ - Select how Ercaspay Checkout displays to your customers. A popup displays Ercaspay Checkout on the same page, while Redirect will redirect your customer to make payment.
-6. __API Keys__ - The next two text boxes are for your Ercaspay API keys, which you can get from your Ercaspay Dashboard. If you enabled Test Mode in step four, then you'll need to use your test API keys here. Otherwise, you can enter your live keys.
-7. Click on __Save Changes__ to update the settings.
+5. __API Keys__ - The next two text boxes are for your Ercaspay API keys, which you can get from your Ercaspay Dashboard. If you enabled Test Mode in step four, then you'll need to use your test API keys here. Otherwise, you can enter your live keys.
+6. Click on __Save Changes__ to update the settings.
 
 If you do not find Ercaspay on the Payment method options, please go through the settings again and ensure that:
 

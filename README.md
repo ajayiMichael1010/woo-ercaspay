@@ -1,9 +1,9 @@
 # woo-ercaspay
 === ErcasPay WooCommerce Payment Gateway === Contributors: Michael Tags:
-ercaspay, woocommerce, payment gateway, tubiz plugins, verve, ghana,
+ercaspay, woocommerce, payment gateway, verve, ghana,
 kenya, nigeria, south africa, naira, cedi, rand, mastercard, visa
 Requires at least: 5.8 Tested up to: 6.3 Stable tag: 5.8.0 Requires PHP:
-7.4 License: GPLv2 or later License URI:
+7.4 or later License: GPLv2 or later License URI:
 http://www.gnu.org/licenses/gpl-2.0.html
 
 Ercaspay for WooCommerce allows your store in Nigeria, Ghana, Kenya, or
@@ -90,14 +90,11 @@ the screen. Read what each one does below.
     with test payment methods, no money is involved so there is no risk.
     You can uncheck this when your store is ready to accept real
     payments.
-5.  **Payment Option** - Select how Ercaspay Checkout displays to your
-    customers. A popup displays Ercaspay Checkout on the same page,
-    while Redirect will redirect your customer to make payment.
-6.  **API Keys** - The next two text boxes are for your Ercaspay API
+5.   **API Keys** - The next two text boxes are for your Ercaspay API
     keys, which you can get from your Ercaspay Dashboard. If you enabled
     Test Mode in step four, then you'll need to use your test API keys
     here. Otherwise, you can enter your live keys.
-7.  Click on **Save Changes** to update the settings.
+6. Click on **Save Changes** to update the settings.
 
 If you do not find Ercaspay on the Payment method options, please go
 through the settings again and ensure that:
