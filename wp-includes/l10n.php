@@ -985,9 +985,6 @@ function load_default_textdomain( $locale = null ) {
  * @since 4.6.0 The function now tries to load the .mo file from the languages directory first.
  * @since 6.7.0 Translations are no longer immediately loaded, but handed off to the just-in-time loading mechanism.
  *
- * @global WP_Textdomain_Registry $wp_textdomain_registry WordPress Textdomain Registry.
- * @global array<string, WP_Translations|NOOP_Translations> $l10n An array of all currently loaded text domains.
- *
  * @param string       $domain          Unique identifier for retrieving translated strings
  * @param string|false $deprecated      Optional. Deprecated. Use the $plugin_rel_path parameter instead.
  *                                      Default false.
@@ -997,8 +994,7 @@ function load_default_textdomain( $locale = null ) {
  */
 function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path = false ) {
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
-	/** @var array<string, WP_Translations|NOOP_Translations> $l10n */
-	global $wp_textdomain_registry, $l10n;
+	global $wp_textdomain_registry;
 
 	if ( ! is_string( $domain ) ) {
 		return false;
@@ -1015,11 +1011,6 @@ function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path 
 
 	$wp_textdomain_registry->set_custom_path( $domain, $path );
 
-	// If just-in-time loading was triggered before, reset the entry so it can be tried again.
-	if ( isset( $l10n[ $domain ] ) && $l10n[ $domain ] instanceof NOOP_Translations ) {
-		unset( $l10n[ $domain ] );
-	}
-
 	return true;
 }
 
@@ -1031,7 +1022,6 @@ function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path 
  * @since 6.7.0 Translations are no longer immediately loaded, but handed off to the just-in-time loading mechanism.
  *
  * @global WP_Textdomain_Registry $wp_textdomain_registry WordPress Textdomain Registry.
- * @global array<string, WP_Translations|NOOP_Translations> $l10n An array of all currently loaded text domains.
  *
  * @param string $domain             Text domain. Unique identifier for retrieving translated strings.
  * @param string $mu_plugin_rel_path Optional. Relative to `WPMU_PLUGIN_DIR` directory in which the .mo
@@ -1040,8 +1030,7 @@ function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path 
  */
 function load_muplugin_textdomain( $domain, $mu_plugin_rel_path = '' ) {
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
-	/** @var array<string, WP_Translations|NOOP_Translations> $l10n */
-	global $wp_textdomain_registry, $l10n;
+	global $wp_textdomain_registry;
 
 	if ( ! is_string( $domain ) ) {
 		return false;
@@ -1050,11 +1039,6 @@ function load_muplugin_textdomain( $domain, $mu_plugin_rel_path = '' ) {
 	$path = WPMU_PLUGIN_DIR . '/' . ltrim( $mu_plugin_rel_path, '/' );
 
 	$wp_textdomain_registry->set_custom_path( $domain, $path );
-
-	// If just-in-time loading was triggered before, reset the entry so it can be tried again.
-	if ( isset( $l10n[ $domain ] ) && $l10n[ $domain ] instanceof NOOP_Translations ) {
-		unset( $l10n[ $domain ] );
-	}
 
 	return true;
 }
@@ -1072,7 +1056,6 @@ function load_muplugin_textdomain( $domain, $mu_plugin_rel_path = '' ) {
  * @since 6.7.0 Translations are no longer immediately loaded, but handed off to the just-in-time loading mechanism.
  *
  * @global WP_Textdomain_Registry $wp_textdomain_registry WordPress Textdomain Registry.
- * @global array<string, WP_Translations|NOOP_Translations> $l10n An array of all currently loaded text domains.
  *
  * @param string       $domain Text domain. Unique identifier for retrieving translated strings.
  * @param string|false $path   Optional. Path to the directory containing the .mo file.
@@ -1081,8 +1064,7 @@ function load_muplugin_textdomain( $domain, $mu_plugin_rel_path = '' ) {
  */
 function load_theme_textdomain( $domain, $path = false ) {
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
-	/** @var array<string, WP_Translations|NOOP_Translations> $l10n */
-	global $wp_textdomain_registry, $l10n;
+	global $wp_textdomain_registry;
 
 	if ( ! is_string( $domain ) ) {
 		return false;
@@ -1093,11 +1075,6 @@ function load_theme_textdomain( $domain, $path = false ) {
 	}
 
 	$wp_textdomain_registry->set_custom_path( $domain, $path );
-
-	// If just-in-time loading was triggered before, reset the entry so it can be tried again.
-	if ( isset( $l10n[ $domain ] ) && $l10n[ $domain ] instanceof NOOP_Translations ) {
-		unset( $l10n[ $domain ] );
-	}
 
 	return true;
 }

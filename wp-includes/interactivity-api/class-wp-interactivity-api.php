@@ -584,8 +584,7 @@ final class WP_Interactivity_API {
 			} elseif ( is_object( $current ) && isset( $current->$path_segment ) ) {
 				$current = $current->$path_segment;
 			} else {
-				$current = null;
-				break;
+				return null;
 			}
 
 			if ( $current instanceof Closure ) {
@@ -1089,6 +1088,19 @@ HTML;
 	private function data_wp_router_region_processor( WP_Interactivity_API_Directives_Processor $p, string $mode ) {
 		if ( 'enter' === $mode && ! $this->has_processed_router_region ) {
 			$this->has_processed_router_region = true;
+
+			/*
+			 * Initialize the `core/router` store.
+			 * If the store is not initialized like this with minimal
+			 * navigation object, the interactivity-router script module
+			 * errors.
+			 */
+			$this->state(
+				'core/router',
+				array(
+					'navigation' => new stdClass(),
+				)
+			);
 
 			// Enqueues as an inline style.
 			wp_register_style( 'wp-interactivity-router-animations', false );

@@ -32,7 +32,7 @@ define( 'DB_PASSWORD', '' );
 define( 'DB_HOST', 'localhost' );
 
 /** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define( 'DB_CHARSET', 'utf8mb4' );
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
@@ -48,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define( 'AUTH_KEY',         '>`=b^nW1v`!n[H/uZgkfpr=!I(gaEXrF-qY` aXs{cUE03r2{C^4hp]~:RhR:nA_' );
+define( 'SECURE_AUTH_KEY',  'm3vd|,1ez(w&{fPn1S^;(4HB~k)^|qQ)HmH+?%8l1%^nG!p6VH][C4XPnUf8=tQ/' );
+define( 'LOGGED_IN_KEY',    '2H]wrAuzt?L,l7wlD[1pRG?n$IN`v6WD2YhSb57ux_)*Nc_@Er IK*-ITQns4A6S' );
+define( 'NONCE_KEY',        '^*5G/iVNlo)CdzRkUbC6+H~Z:) :nYws[.KZHk8BV xFNV Swe[C!DzrAFt!_87B' );
+define( 'AUTH_SALT',        '?,>l)yX9JKX3MYuCVfCp8K]8I5z0f[y8_97py4LURAw]zrA}T0us( yS7-TjBm~,' );
+define( 'SECURE_AUTH_SALT', '!LDdOu:+u,V2WBJ#L }QPAP7Sg:Ik.Vz]~EYC94/BG35<} G8i2h:5SW?|Fo%J$8' );
+define( 'LOGGED_IN_SALT',   'XW:xH}SdV+]4We]*}v6#bfq]IBXki7y=QO8[V1MuM0HgF:_SacflEB,f`9_F9oSN' );
+define( 'NONCE_SALT',       'r%_]<mSyexV4q/m:J(`@~iO]Hu@G`:B:W@]I-FE:0[tf|H]s^S _Hs:@#up< NNc' );
 
 /**#@-*/
 
@@ -83,10 +83,9 @@ $table_prefix = 'wp_';
  * For information on other constants that can be used for debugging,
  * visit the documentation.
  *
- *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -96,7 +95,7 @@ define( 'WP_DEBUG', true );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+    define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */

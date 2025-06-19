@@ -2479,7 +2479,16 @@ if ( ! function_exists( 'wp_salt' ) ) :
 
 		static $duplicated_keys;
 		if ( null === $duplicated_keys ) {
-			$duplicated_keys = array();
+			$duplicated_keys = array(
+				'put your unique phrase here' => true,
+			);
+
+			/*
+			 * translators: This string should only be translated if wp-config-sample.php is localized.
+			 * You can check the localized release package or
+			 * https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php
+			 */
+			$duplicated_keys[ __( 'put your unique phrase here' ) ] = true;
 
 			foreach ( array( 'AUTH', 'SECURE_AUTH', 'LOGGED_IN', 'NONCE', 'SECRET' ) as $first ) {
 				foreach ( array( 'KEY', 'SALT' ) as $second ) {
@@ -2490,15 +2499,6 @@ if ( ! function_exists( 'wp_salt' ) ) :
 					$duplicated_keys[ $value ] = isset( $duplicated_keys[ $value ] );
 				}
 			}
-
-			$duplicated_keys['put your unique phrase here'] = true;
-
-			/*
-			 * translators: This string should only be translated if wp-config-sample.php is localized.
-			 * You can check the localized release package or
-			 * https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php
-			 */
-			$duplicated_keys[ __( 'put your unique phrase here' ) ] = true;
 		}
 
 		/*

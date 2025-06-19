@@ -319,7 +319,7 @@
 								$selected = 'selected';
 							}
 
-							$html += '<option ' + $selected + ' value="0">' + wp.i18n._x( 'No Parent', 'menu item without a parent in navigation menu' ) + '</option>';
+							$html += '<option ' + $selected + ' value="0">No Parent</option>';
 
 							$.each( menuItems, function() {
 								var menuItem = $(this),
@@ -364,13 +364,7 @@
 									if ( i == itemPosition ) { 
 										$selected = 'selected';
 									}
-									var itemString = wp.i18n.sprintf( 
-										/* translators: 1: The current menu item number, 2: The total number of menu items. */
-										wp.i18n._x( '%1$s of %2$s', 'part of a total number of menu items' ),
-										i,
-										totalMenuItems
-									);
-									$html += '<option ' + $selected + ' value="' + i + '">' + itemString + '</option>';
+									$html += '<option ' + $selected + ' value="' + i + '">' + i + ' of ' + totalMenuItems + '</option>';
 								}
 
 							} else {
@@ -386,13 +380,7 @@
 									if ( i == itemPosition ) {
 										$selected = 'selected';
 									}
-									var submenuString = wp.i18n.sprintf( 
-										/* translators: 1: The current submenu item number, 2: The total number of submenu items. */
-										wp.i18n._x( '%1$s of %2$s', 'part of a total number of menu items' ),
-										i,
-										totalSubMenuItems
-									);
-									$html += '<option ' + $selected + ' value="' + i + '">' + submenuString + '</option>';
+									$html += '<option ' + $selected + ' value="' + i + '">' + i + ' of ' + totalSubMenuItems + '</option>';
 								}
 
 							}

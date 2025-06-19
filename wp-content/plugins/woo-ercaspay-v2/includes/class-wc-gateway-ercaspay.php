@@ -398,7 +398,7 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
                 'default'     => 'no',
                 'desc_tip'    => true,
             ),
-            'title'                            => array(
+            'title'           => array(
                 'title'       => __( 'Title', 'woo-ercaspay' ),
                 'type'        => 'text',
                 'description' => __( 'This controls the payment method title which the user sees during checkout.', 'woo-ercaspay' ),
@@ -499,6 +499,15 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
                 'default'     => 'Merchant',
             ),
 
+            'webhook_info' => array(
+                'title'       => __( 'Webhook URL', 'woo-ercaspay' ),
+                'type'        => 'title',
+                'description' => sprintf(
+                    __( 'Add webhook url to your ercaspay settings: <code>%s</code>', 'woo-ercaspay' ),
+                    esc_url( rest_url( 'api/v1/ercaspay/webhook' ) )
+                ),
+            ),
+
         );
 
         if ( 'NGN' !== get_woocommerce_currency() ) {
@@ -531,19 +540,20 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
     }
 
 
-    private function initiate_checkout($order_id){
+    private function initiate_checkout($order_id)
+    {
         //$access_token = $this->generate_access_token();
 
         $headers = array(
-            'Authorization' => "Bearer ". $this->secret_key,
-            'Content-Type'  => 'application/json',
+            'Authorization' => "Bearer " . $this->secret_key,
+            'Content-Type' => 'application/json',
         );
 
         $ercas_data = [];
 
-        $order        = wc_get_order( $order_id );
-        $amount       = $order->get_total();
-        $txnref       = $order_id . '_' . time();
+        $order = wc_get_order($order_id);
+        $amount = $order->get_total();
+        $txnref = $order_id . '_' . time();
         $callback_url = WC()->api_request_url('WC_Gateway_ErcasPay');
 
         $ercas_data["amount"] = $amount;
@@ -563,38 +573,48 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
         $args = array(
             'headers' => $headers,
             'timeout' => 60,
-            'body'    => json_encode( $ercas_data ),
+            'body' => json_encode($ercas_data),
         );
 
 
-        $this->test_base_url = $this->test_base_url !="" ? $this->test_base_url : "https://api.dev.ercaspay.com/api/v1";
-        $this->live_base_url = $this->live_base_url !="" ? $this->live_base_url : "https://api.ercaspay.com/api/v1";
-        $checkout_endpoint = $this->testmode ? $this->test_base_url."/payment/initiate" : $this->live_base_url."/payment/initiate";
-        $checkout_request = wp_remote_post( $checkout_endpoint, $args );
+        $this->test_base_url = $this->test_base_url != "" ? $this->test_base_url : "https://api.dev.ercaspay.com/api/v1";
+        $this->live_base_url = $this->live_base_url != "" ? $this->live_base_url : "https://api.ercaspay.com/api/v1";
+        $checkout_endpoint = $this->testmode ? $this->test_base_url . "/payment/initiate" : $this->live_base_url . "/payment/initiate";
 
-        $this->currency = $this->currency !="" ? $this->currency : "NGN";
-        
-        error_log( print_r( $checkout_request, true ) );
+        $checkout_request = wp_remote_post($checkout_endpoint, $args);
 
-        if ( ! is_wp_error( $checkout_request )  ) {
+        $this->currency = $this->currency != "" ? $this->currency : "NGN";
 
-            error_log( $checkout_endpoint);
+        //error_log( print_r( $checkout_request, true ) );
 
-            $checkout_response = json_decode( wp_remote_retrieve_body( $checkout_request ) );
+        if (!is_wp_error($checkout_request)) {
 
-            error_log( print_r( $checkout_response, true ) );
+
+            $checkout_response = json_decode(wp_remote_retrieve_body($checkout_request));
+
+            error_log(print_r($checkout_response, true));
 
             //header("location : ". $checkout_response->responseBody->checkoutUrl);
 
+            if ($checkout_response->responseCode != "success") {
+
+                wc_print_notice('Payment error:', 'error', true);
+
+                return array(
+                    'result'   => 'failure'
+                );
+            }
+
             return array(
-                'result'   => 'success',
+                'result' => 'success',
                 'redirect' => $checkout_response->responseBody->checkoutUrl
             );
 
         } else {
-            wc_add_notice( __( 'Unable to process payment try again', 'woo-ercaspay' ), 'error' );
-
-            return ;
+            wc_add_notice(__('Unable to process payment try again', 'woo-ercaspay'), 'error');
+            return [
+                'result' => 'failure'
+            ];
         }
     }
 
@@ -609,8 +629,11 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
             'timeout' => 60,
         );
 
-        $checkout_endpoint = $this->testmode ? "https://gw.ercaspay.com/api/v1/payment/transaction/verify/".$transaction_reference : "https://api.ercaspay.com/api/v1/payment/transaction/verify/".$transaction_reference;
-        $transaction_details_response = wp_remote_get( $checkout_endpoint, $args );
+        $this->test_base_url = $this->test_base_url != "" ? $this->test_base_url : "https://api.dev.ercaspay.com/api/v1";
+        $this->live_base_url = $this->live_base_url != "" ? $this->live_base_url : "https://api.ercaspay.com/api/v1";
+        $verify_endpoint = $this->testmode ? $this->test_base_url . "/payment/transaction/verify/".$transaction_reference : $this->live_base_url . "/payment/transaction/verify/".$transaction_reference;
+
+        $transaction_details_response = wp_remote_get( $verify_endpoint, $args );
 
         if ( ! is_wp_error( $transaction_details_response )  ) {
             $transaction_details = json_decode( wp_remote_retrieve_body( $transaction_details_response ),true );
