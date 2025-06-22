@@ -251,9 +251,9 @@ function handle_ercaspay_webhook(WP_REST_Request $request)
         );
 
         $order->add_order_note($transaction_details);
-    }
 
-    $order->add_order_note('Order completed from ERCAS webhook.');
+        $order->add_order_note('Order completed from ERCAS webhook.');
+    }
 
     return new WP_REST_Response(['success' => true], 200);
 }
