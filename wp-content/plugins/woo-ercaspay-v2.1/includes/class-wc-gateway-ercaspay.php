@@ -1,5 +1,7 @@
 <?php
 
+use Automattic\WooCommerce\StoreApi\Exceptions\RouteException;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -498,16 +500,6 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
                 'description' => __( 'Choose the Fee bearer.', 'woo-ercaspay' ),
                 'default'     => 'Merchant',
             ),
-
-            'webhook_info' => array(
-                'title'       => __( 'Webhook URL', 'woo-ercaspay' ),
-                'type'        => 'title',
-                'description' => sprintf(
-                    __( 'Add webhook url to your ercaspay settings: <code>%s</code>', 'woo-ercaspay' ),
-                    esc_url( rest_url( 'api/v1/ercaspay/webhook' ) )
-                ),
-            ),
-
         );
 
         if ( 'NGN' !== get_woocommerce_currency() ) {
@@ -542,8 +534,6 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
 
     private function initiate_checkout($order_id)
     {
-        //$access_token = $this->generate_access_token();
-
         $headers = array(
             'Authorization' => "Bearer " . $this->secret_key,
             'Content-Type' => 'application/json',
@@ -585,8 +575,6 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
 
         $this->currency = $this->currency != "" ? $this->currency : "NGN";
 
-        //error_log( print_r( $checkout_request, true ) );
-
         if (!is_wp_error($checkout_request)) {
 
 
@@ -594,14 +582,10 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
 
             error_log(print_r($checkout_response, true));
 
-            //header("location : ". $checkout_response->responseBody->checkoutUrl);
-
             if ($checkout_response->responseCode != "success") {
-
-                wc_print_notice('Payment error:', 'error', true);
-
-                return array(
-                    'result'   => 'failure'
+                throw new RouteException(
+                    'ercaspay_custom_error',
+                    __( $checkout_response->errorMessage )
                 );
             }
 
@@ -641,14 +625,14 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
             return sprintf(
                 __("Payment details:\n\nTransaction Status: %s\nAmount: %s %s\nTransaction Reference: %s\nPayment Channel: %s\nPaid At: %s\nCustomer Name: %s\nPhone Number: %s\nEmail: %s", 'woo-ercaspay'),
                 "Transaction successful",
-                $responseBody['amount'],
-                $responseBody['currency'],
+                $responseBody['amount']??null,
+                $responseBody['currency']??null,
                 $transaction_reference,
-                $responseBody['channel'],
-                $responseBody['paid_at'],
-                $responseBody['customer']['name'],
-                $responseBody['customer']['phone_number'],
-                $responseBody['customer']['email']
+                $responseBody['channel']??null,
+                $responseBody['paid_at']??null,
+                $responseBody['customer']['name']??null,
+                $responseBody['customer']['phone_number']??null,
+                $responseBody['customer']['email']??null
             );
         } else {
             wc_add_notice( __( 'Unable to get transaction details', 'woo-ercaspay' ), 'error' );
@@ -662,6 +646,7 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
      */
     public function verify_ercaspay_transaction()
     {
+
         if (isset($_REQUEST['reference']) && isset($_REQUEST['transRef']) && isset($_REQUEST['status'])) {
             $reference = sanitize_text_field($_REQUEST['reference']);
             $transRef = sanitize_text_field($_REQUEST['transRef']);
@@ -711,9 +696,7 @@ class WC_Gateway_ercaspay extends WC_Payment_Gateway_CC {
 	 * Show new card can only be added when placing an order notice.
 	 */
 	public function add_payment_method() {
-
 		wc_add_notice( __( 'You can only add a new card when placing an order.', 'woo-ercaspay' ), 'error' );
-
 		return;
 
 	}

@@ -69,19 +69,9 @@ function tbz_wc_ercaspay_init() {
 	add_filter( 'woocommerce_payment_gateways', 'tbz_wc_add_ercaspay_gateway', 99 );
 
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'tbz_woo_ercaspay_plugin_action_links' );
+
 }
 add_action( 'plugins_loaded', 'tbz_wc_ercaspay_init', 99 );
-
-add_action( 'rest_api_init', 'my_plugin_register_rest_routes' );
-function my_plugin_register_rest_routes() {
-    register_rest_route( 'api/v1/ercaspay', '/webhook', array(
-        array(
-            'methods'  => 'POST',
-            'callback' => 'handle_ercaspay_webhook',
-            'permission_callback' => '__return_true',
-        ),
-    ) );
-}
 
 /**
  * Add Settings link to the plugin entry in the plugins menu.
@@ -200,61 +190,4 @@ function tbz_wc_gateway_ercaspay_woocommerce_block_support() {
 	}
 }
 add_action( 'woocommerce_blocks_loaded', 'tbz_wc_gateway_ercaspay_woocommerce_block_support' );
-
-
-function handle_ercaspay_webhook(WP_REST_Request $request)
-{
-    $data = $request->get_json_params();
-
-    $order_details = [];
-
-    $paymentReference = isset($data['payment_reference']) ? $data['payment_reference'] : "";
-
-    if ($paymentReference != "") {
-        $order_details = explode("_", $paymentReference);
-    }
-
-    $order_id = isset($order_details[0]) ? $order_details[0] : null;
-
-    $status = $data['status'] ?? null;
-
-    if (!$order_id || strtoupper($status) !== 'SUCCESSFUL') {
-        return new WP_REST_Response(['error' => 'Invalid data'], 400);
-    }
-
-    $order = wc_get_order($order_id);
-
-    if (!$order) {
-        return new WP_REST_Response(['error' => 'Order not found'], 404);
-    }
-
-    if ($order->get_status() !== 'completed') {
-
-        $settings = get_option('woocommerce_ercaspay_settings');
-        $autocomplete = isset($settings['autocomplete_order']) && $settings['autocomplete_order'] === 'yes';
-
-        $order->payment_complete();
-        $order->update_status($autocomplete ? 'completed' : 'processing');
-        $order->save();
-
-        $transaction_details = sprintf(
-            __("Payment details:\n\nTransaction Status: %s\nAmount: %s %s\nTransaction Reference: %s\nPayment Channel: %s\nPaid At: %s\nCustomer Name: %s\nPhone Number: %s\nEmail: %s", 'woo-ercaspay'),
-            "Transaction successful",
-            $data['amount'] ?? "",
-            $data['currency'] ?? "",
-            $data['transaction_reference'],
-            $data['channel'] ?? "",
-            $data['paid_at'] ?? "",
-            $data['customer_account_name'] ?? "",
-            $order->get_billing_phone() ?? "",
-            $order->get_billing_email() ?? ""
-        );
-
-        $order->add_order_note($transaction_details);
-
-        $order->add_order_note('Order completed from ERCAS webhook.');
-    }
-
-    return new WP_REST_Response(['success' => true], 200);
-}
 
